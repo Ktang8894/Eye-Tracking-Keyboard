@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+
 /*Coords For the array of buttons
  * Q(0,0)    W   E   R   T   Y   U   I   O   P
  * A(1,0)    S   D   F   G   H   J   K   L   ;
@@ -9,1330 +10,1322 @@ using System.Windows.Forms;
  */
 namespace EyeTrackingKeyboard
 {
-    public partial class Keyboard : Form
+  public partial class Keyboard : Form
+  {
+    public int BHeight = 3;
+    public int BWidth = 10;
+    public Button[,] MyButtonArray;
+
+    public Keyboard()
     {
-        public int bWidth = 10;
-        public int bHeight = 3;
-        public Button[,] myButtonArray;
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams param = base.CreateParams;
-                    param.ExStyle |= 0x08000000;
-                return param;
-            }
-        }
-        public Keyboard()
-        {
-            InitializeComponent();
-            
-            myButtonArray = new Button[,] { { this.buttonQ, this.buttonW, this.buttonE, this.buttonR, this.buttonT, this.buttonY, this.buttonU, this.buttonI, this.buttonO, this.buttonP }, { this.buttonA, this.buttonS, this.buttonD, this.buttonF, this.buttonG, this.buttonH, this.buttonJ, this.buttonK, this.buttonL, this.buttonColon }, { this.buttonZ, this.buttonX, this.buttonC, this.buttonV, this.buttonB, this.buttonN, this.buttonM, this.buttonLessThen, this.buttonGreaterThen, this.buttonQuestionMarkSlash } };
-        }
-
-        private void buttonQ_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("Q");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-
-            }
-            else
-            {
-                SendKeys.Send("q");
-            }
-        }
-
-        private void sizeChangeNeighbor(int x, int y, int direction)
-        {
-            myButtonArray[y, x].Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-            myButtonArray[y, x].BringToFront();
-            myButtonArray[y, x].Size = new Size(myButtonArray[y, x].Size.Width + (25 * direction), myButtonArray[y, x].Size.Height + (25 * direction));
-            if (x - 1 >= 0)//left
-            {
-                myButtonArray[y, x - 1].Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                myButtonArray[y, x - 1].BringToFront();
-                myButtonArray[y, x - 1].Size = new Size(myButtonArray[y, x-1].Size.Width + (25 * direction), myButtonArray[y, x-1].Size.Height + (25 * direction));
-                myButtonArray[y, x - 1].Location = new Point(myButtonArray[y, x - 1].Location.X - 25*direction, myButtonArray[y, x - 1].Location.Y);
-            }
-            if (x + 1 < bWidth)//right
-            {
-                myButtonArray[y, x + 1].Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                myButtonArray[y, x + 1].BringToFront();
-                myButtonArray[y, x + 1].Size = new Size(myButtonArray[y, x+1].Size.Width + (25 * direction), myButtonArray[y, x+1].Size.Height + (25 * direction));
-                myButtonArray[y, x + 1].Location = new Point(myButtonArray[y, x + 1].Location.X + 25 * direction, myButtonArray[y, x + 1].Location.Y);
-            }
-            if (y - 1 >= 0) //up
-            {
-                myButtonArray[y - 1, x].Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                myButtonArray[y - 1, x].BringToFront();
-                myButtonArray[y - 1, x].Size = new Size(myButtonArray[y - 1, x].Size.Width + (25 * direction), myButtonArray[y - 1, x].Size.Height + (25 * direction));
-                myButtonArray[y - 1, x].Location = new Point(myButtonArray[y - 1, x].Location.X, myButtonArray[y - 1, x].Location.Y - 25 * direction);
-            }
-            if (y + 1 < bHeight)//down
-            {
-                myButtonArray[y + 1, x].Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                myButtonArray[y + 1, x].BringToFront();
-                myButtonArray[y + 1, x].Size = new Size(myButtonArray[y + 1, x].Size.Width + (25 * direction), myButtonArray[y + 1, x].Size.Height+(25*direction));
-                myButtonArray[y + 1, x].Location = new Point(myButtonArray[y + 1, x].Location.X, myButtonArray[y + 1, x].Location.Y + 25 * direction);
-            }
-
-        }
-
-        private void buttonQ_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonQ_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonW_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("W");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("w");
-            }
-        }
-
-        private void buttonW_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonW_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonE_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("E");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("e");
-            }
-        }
-
-        private void buttonE_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonE_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonR_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("R");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("r");
-            }
-        }
-
-        private void buttonR_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonR_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonT_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("T");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("t");
-            }
-        }
-
-        private void buttonT_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonT_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonY_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("Y");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("y");
-            }
-        }
-
-        private void buttonY_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonY_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonU_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("U");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("u");
-            }
-        }
-
-        private void buttonU_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonU_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonI_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("I");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("i");
-            }
-        }
-
-        private void buttonI_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonI_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonO_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("O");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("o");
-            }
-        }
-
-        private void buttonO_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonO_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonP_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("P");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("p");
-            }
-        }
-
-        private void buttonP_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 0;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonP_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 0;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonA_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("A");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("a");
-            }
-        }
-
-        private void buttonA_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonA_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonS_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("S");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("s");
-            }
-        }
-
-        private void buttonS_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonS_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonF_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("F");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("f");
-            }
-        }
-        private void buttonF_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonF_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonG_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("G");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("g");
-            }
-        }
-
-        private void buttonG_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonG_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonH_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("H");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("h");
-            }
-        }
-        private void buttonH_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonH_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonJ_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("J");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("j");
-            }
-        }
-
-        private void buttonJ_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonJ_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonK_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("K");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("k");
-            }
-        }
-
-        private void buttonK_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonK_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonL_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("L");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("l");
-            }
-        }
-
-        private void buttonL_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonL_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonZ_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("Z");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("z");
-            }
-        }
-
-        private void buttonZ_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonZ_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 0;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonX_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("X");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("x");
-            }
-        }
-
-        private void buttonX_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonX_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 1;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonC_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("C");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("c");
-            }
-        }
-
-        private void buttonC_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonC_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonV_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("V");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("v");
-            }
-        }
-
-        private void buttonV_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonV_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 3;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonB_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("B");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("b");
-            }
-        }
-
-        private void buttonB_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonB_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 4;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonN_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("N");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("n");
-            }
-        }
-
-        private void buttonN_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonN_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 5;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonM_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("M");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("m");
-            }
-        }
-
-        private void buttonM_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonM_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 6;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonD_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("D");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("d");
-            }
-        }
-
-        private void buttonD_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonD_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 2;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonCurlyBracketOpen_Click(object sender, EventArgs e)
-        {
-            if(checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{{}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("[");
-            }
-        }
-
-        private void buttonCurlyBracketClose_Click(object sender, EventArgs e)
-        {
-            if (checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{}}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("]");
-            }
+      InitializeComponent();
+
+      MyButtonArray = new[,]
+      {
+        {buttonQ, buttonW, buttonE, buttonR, buttonT, buttonY, buttonU, buttonI, buttonO, buttonP},
+        {buttonA, buttonS, buttonD, buttonF, buttonG, buttonH, buttonJ, buttonK, buttonL, buttonColon},
+        {
+          buttonZ, buttonX, buttonC, buttonV, buttonB, buttonN, buttonM, buttonLessThen, buttonGreaterThen,
+          buttonQuestionMarkSlash
+        }
+      };
+    }
+
+    protected override CreateParams CreateParams
+    {
+      get
+      {
+        var param = base.CreateParams;
+        param.ExStyle |= 0x08000000;
+        return param;
+      }
+    }
+
+    private void ButtonQClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("Q");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("q");
+      }
+    }
+
+    private void SizeChangeNeighbor(int x, int y, int direction)
+    {
+      MyButtonArray[y, x].Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      MyButtonArray[y, x].BringToFront();
+      MyButtonArray[y, x].Size = new Size(MyButtonArray[y, x].Size.Width + 25 * direction,
+        MyButtonArray[y, x].Size.Height + 25 * direction);
+      if (x - 1 >= 0) //left
+      {
+        MyButtonArray[y, x - 1].Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        MyButtonArray[y, x - 1].BringToFront();
+        MyButtonArray[y, x - 1].Size = new Size(MyButtonArray[y, x - 1].Size.Width + 25 * direction,
+          MyButtonArray[y, x - 1].Size.Height + 25 * direction);
+        MyButtonArray[y, x - 1].Location = new Point(MyButtonArray[y, x - 1].Location.X - 25 * direction,
+          MyButtonArray[y, x - 1].Location.Y);
+      }
+
+      if (x + 1 < BWidth) //right
+      {
+        MyButtonArray[y, x + 1].Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        MyButtonArray[y, x + 1].BringToFront();
+        MyButtonArray[y, x + 1].Size = new Size(MyButtonArray[y, x + 1].Size.Width + 25 * direction,
+          MyButtonArray[y, x + 1].Size.Height + 25 * direction);
+        MyButtonArray[y, x + 1].Location = new Point(MyButtonArray[y, x + 1].Location.X + 25 * direction,
+          MyButtonArray[y, x + 1].Location.Y);
+      }
+
+      if (y - 1 >= 0) //up
+      {
+        MyButtonArray[y - 1, x].Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        MyButtonArray[y - 1, x].BringToFront();
+        MyButtonArray[y - 1, x].Size = new Size(MyButtonArray[y - 1, x].Size.Width + 25 * direction,
+          MyButtonArray[y - 1, x].Size.Height + 25 * direction);
+        MyButtonArray[y - 1, x].Location = new Point(MyButtonArray[y - 1, x].Location.X,
+          MyButtonArray[y - 1, x].Location.Y - 25 * direction);
+      }
+
+      if (y + 1 < BHeight) //down
+      {
+        MyButtonArray[y + 1, x].Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        MyButtonArray[y + 1, x].BringToFront();
+        MyButtonArray[y + 1, x].Size = new Size(MyButtonArray[y + 1, x].Size.Width + 25 * direction,
+          MyButtonArray[y + 1, x].Size.Height + 25 * direction);
+        MyButtonArray[y + 1, x].Location = new Point(MyButtonArray[y + 1, x].Location.X,
+          MyButtonArray[y + 1, x].Location.Y + 25 * direction);
+      }
+    }
+
+    private void ButtonQMouseEnter(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonQMouseLeave(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonWClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("W");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("w");
+      }
+    }
+
+    private void ButtonWMouseEnter(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonWMouseLeave(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonEClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("E");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("e");
+      }
+    }
+
+    private void ButtonEMouseEnter(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonEMouseLeave(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonRClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("R");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("r");
+      }
+    }
+
+    private void ButtonRMouseEnter(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonRMouseLeave(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonTClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("T");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("t");
+      }
+    }
+
+    private void ButtonTMouseEnter(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonTMouseLeave(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonYClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("Y");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("y");
+      }
+    }
+
+    private void ButtonYMouseEnter(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonYMouseLeave(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonUClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("U");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("u");
+      }
+    }
+
+    private void ButtonUMouseEnter(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonUMouseLeave(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonIClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("I");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("i");
+      }
+    }
+
+    private void ButtonIMouseEnter(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonIMouseLeave(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonOClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("O");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("o");
+      }
+    }
+
+    private void ButtonOMouseEnter(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonOMouseLeave(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonPClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("P");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("p");
+      }
+    }
+
+    private void ButtonPMouseEnter(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 0;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonPMouseLeave(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 0;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonAClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("A");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("a");
+      }
+    }
+
+    private void ButtonAMouseEnter(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonAMouseLeave(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonSClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("S");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("s");
+      }
+    }
+
+    private void ButtonSMouseEnter(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonSMouseLeave(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonFClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("F");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("f");
+      }
+    }
+
+    private void ButtonFMouseEnter(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonFMouseLeave(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonGClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("G");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("g");
+      }
+    }
+
+    private void ButtonGMouseEnter(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonGMouseLeave(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonHClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("H");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("h");
+      }
+    }
+
+    private void ButtonHMouseEnter(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonHMouseLeave(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonJClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("J");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("j");
+      }
+    }
+
+    private void ButtonJMouseEnter(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonJMouseLeave(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonKClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("K");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("k");
+      }
+    }
+
+    private void ButtonKMouseEnter(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonKMouseLeave(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonLClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("L");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("l");
+      }
+    }
+
+    private void ButtonLMouseEnter(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonLMouseLeave(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonZClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("Z");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("z");
+      }
+    }
+
+    private void ButtonZMouseEnter(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonZMouseLeave(object sender, EventArgs e)
+    {
+      var x = 0;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonXClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("X");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("x");
+      }
+    }
+
+    private void ButtonXMouseEnter(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonXMouseLeave(object sender, EventArgs e)
+    {
+      var x = 1;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonCClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("C");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("c");
+      }
+    }
+
+    private void ButtonCMouseEnter(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonCMouseLeave(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonVClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("V");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("v");
+      }
+    }
+
+    private void ButtonVMouseEnter(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonVMouseLeave(object sender, EventArgs e)
+    {
+      var x = 3;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonBClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("B");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("b");
+      }
+    }
+
+    private void ButtonBMouseEnter(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonBMouseLeave(object sender, EventArgs e)
+    {
+      var x = 4;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonNClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("N");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("n");
+      }
+    }
+
+    private void ButtonNMouseEnter(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonNMouseLeave(object sender, EventArgs e)
+    {
+      var x = 5;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonMClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("M");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("m");
+      }
+    }
+
+    private void ButtonMMouseEnter(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonMMouseLeave(object sender, EventArgs e)
+    {
+      var x = 6;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonDClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("D");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("d");
+      }
+    }
+
+    private void ButtonDMouseEnter(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonDMouseLeave(object sender, EventArgs e)
+    {
+      var x = 2;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonCurlyBracketOpenClick(object sender, EventArgs e)
+    {
+      if (checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{{}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("[");
+      }
+    }
+
+    private void ButtonCurlyBracketCloseClick(object sender, EventArgs e)
+    {
+      if (checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{}}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("]");
+      }
+    }
 
-        }
     //
-   //Implementation of Enter, esc, Fs
-   //
-   
-        private void buttonEnter_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{ENTER}");
-        }
-
-        private void buttonEsc_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{ESC}");
-        }
-
-        //setting up all function keys
-        private void buttonF1_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F1}");
-        }
-
-        private void buttonF2_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F2}");
-        }
-
-        private void buttonF3_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F3}");
-        }
-
-        private void buttonF4_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F4}");
-        }
-
-        private void buttonF5_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F5}");
-        }
-
-        private void buttonF6_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F6}");
-        }
-
-        private void buttonF7_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F7}");
-        }
-
-        private void buttonF8_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F8}");
-        }
-
-        private void buttonF9_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F9}");
-        }
-
-        private void buttonF10_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F10}");
-        }
-
-        private void buttonF11_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F11}");
-        }
-
-        private void buttonF12_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{F12}");
-        }
-
-        private void buttonPrntScr_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{PRTSC}");
-        }
-
-    
-        private void buttonPageUp_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{PGUP}");
-        }
-
-        private void buttonPageDown_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{PGDN}");
-        }
-
-        private void buttonBackSpace_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{BACKSPACE}");            
-        }
-
-
-
-        private void buttonTab_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send("{TAB}");
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonSpace_Click(object sender, EventArgs e)
-        {
-            SendKeys.Send(" ");
-        }
-
-        private void buttonLessThen_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("<");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send(",");
-            }
-        }
-
-        private void buttonLessThen_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonLessThen_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 7;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-
-
-        private void buttonGreaterThen_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send(">");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send(".");
-            }
-        }
-
-        private void buttonGreaterThen_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonGreaterThen_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 8;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonQuestionMarkSlash_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("?");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{/}");
-            }
-        }
-
-        private void buttonQuestionMarkSlash_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 2;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonQuestionMarkSlash_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 2;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonColon_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send(":");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send(";");
-            }
-        }
-
-        private void buttonColon_MouseEnter(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 1;
-            sizeChangeNeighbor(x, y, 1);
-
-        }
-        private void buttonColon_MouseLeave(object sender, EventArgs e)
-        {
-            int x = 9;
-            int y = 1;
-            sizeChangeNeighbor(x, y, -1);
-        }
-
-        private void buttonQuotesComaRight_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("\"");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("'");
-            }
-        }
-
-        private void buttonVerticalBarRigthSlash_Click(object sender, EventArgs e)
-        {
-
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("|");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("\\");
-            }
-        }
-
-        private void buttonTildeComma_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{~}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("`");
-            }
-        }
-
-        private void buttonNumOne_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("!");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{1}");
-            }
-        }
-
-        private void buttonNumTwo_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("@");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{2}");
-            }
-        }
-
-        private void buttonNumThree_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("#");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{3}");
-            }
-        }
-
-        private void buttonNumFour_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("$");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{4}");
-            }
-        }
-
-        private void buttonNumFive_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{%}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{5}");
-            }
-        }
-
-        private void buttonNumSix_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{^}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{6}");
-            }
-        }
-
-        private void buttonNumSeven_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("&");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{7}");
-            }
-        }
-
-        private void buttonNumEight_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{*}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{8}");
-            }
-        }
-
-        private void buttonNUmNine_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{(}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{9}");
-            }
-        }
-
-        private void buttonNumZero_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{)}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{0}");
-            }
-        }
-
-        private void buttonMinus_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("_");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("{-}");
-            }
-        }
-
-        private void buttonPlus_Click(object sender, EventArgs e)
-        {
-            if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
-            {
-                SendKeys.Send("{+}");
-                checkBoxLeftShift.Checked = false;
-                checkBoxRightShift.Checked = false;
-            }
-            else
-            {
-                SendKeys.Send("=");
-            }
-        }
-
-        private void buttonDel_Click(object sender, EventArgs e)
-        {
-         
-            SendKeys.Send("{DELETE}");
-        
-    }
-
-    private void Form1_Load(object sender, EventArgs e)
+    //Implementation of Enter, esc, Fs
+    //
+    private void ButtonEnterClick(object sender, EventArgs e)
     {
-      int x = Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2;
-      int y = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
-      this.Location = new Point(x, y);
-      this.TopMost = true;
-      this.Opacity = 0.9;
+      SendKeys.Send("{ENTER}");
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private void ButtonEscClick(object sender, EventArgs e)
     {
-      this.Visible = false;
+      SendKeys.Send("{ESC}");
     }
 
-    private void checkBoxRightShift_CheckedChanged(object sender, EventArgs e)
+    //setting up all function keys
+    private void ButtonF1Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F1}");
     }
 
-    private void buttonStartRight_Click(object sender, EventArgs e)
+    private void ButtonF2Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F2}");
     }
 
-    private void buttonCtrlRight_Click(object sender, EventArgs e)
+    private void ButtonF3Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F3}");
     }
 
-    private void buttonAltRight_Click(object sender, EventArgs e)
+    private void ButtonF4Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F4}");
     }
 
-    private void buttonAltLeft_Click(object sender, EventArgs e)
+    private void ButtonF5Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F5}");
     }
 
-    private void buttonStartLeft_Click(object sender, EventArgs e)
+    private void ButtonF6Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F6}");
     }
 
-    private void checkBoxCtrlLeft_CheckedChanged(object sender, EventArgs e)
+    private void ButtonF7Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F7}");
     }
 
-    private void checkBoxLeftShift_CheckedChanged(object sender, EventArgs e)
+    private void ButtonF8Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F8}");
     }
 
-    private void checkBoxCapLock_CheckedChanged(object sender, EventArgs e)
+    private void ButtonF9Click(object sender, EventArgs e)
     {
-
+      SendKeys.Send("{F9}");
     }
 
- 
-
-
-        //helpful:
-
-        //SendKeys.Send("{HOME}");
-        //SendKeys.Send("{END}");
-
-
+    private void ButtonF10Click(object sender, EventArgs e)
+    {
+      SendKeys.Send("{F10}");
     }
+
+    private void ButtonF11Click(object sender, EventArgs e)
+    {
+      SendKeys.Send("{F11}");
+    }
+
+    private void ButtonF12Click(object sender, EventArgs e)
+    {
+      SendKeys.Send("{F12}");
+    }
+
+    private void ButtonPrntScrClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{PRTSC}");
+    }
+
+
+    private void ButtonPageUpClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{PGUP}");
+    }
+
+    private void ButtonPageDownClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{PGDN}");
+    }
+
+    private void ButtonBackSpaceClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{BACKSPACE}");
+    }
+
+    private void ButtonTabClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{TAB}");
+    }
+
+    private void ButtonSpaceClick(object sender, EventArgs e)
+    {
+      SendKeys.Send(" ");
+    }
+
+    private void ButtonLessThenClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("<");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send(",");
+      }
+    }
+
+    private void ButtonLessThenMouseEnter(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonLessThenMouseLeave(object sender, EventArgs e)
+    {
+      var x = 7;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+
+    private void ButtonGreaterThenClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send(">");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send(".");
+      }
+    }
+
+    private void ButtonGreaterThenMouseEnter(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonGreaterThenMouseLeave(object sender, EventArgs e)
+    {
+      var x = 8;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonQuestionMarkSlashClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("?");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{/}");
+      }
+    }
+
+    private void ButtonQuestionMarkSlashMouseEnter(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 2;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonQuestionMarkSlashMouseLeave(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 2;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonColonClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send(":");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send(";");
+      }
+    }
+
+    private void ButtonColonMouseEnter(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 1;
+      SizeChangeNeighbor(x, y, 1);
+    }
+
+    private void ButtonColonMouseLeave(object sender, EventArgs e)
+    {
+      var x = 9;
+      var y = 1;
+      SizeChangeNeighbor(x, y, -1);
+    }
+
+    private void ButtonQuotesComaRightClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("\"");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("'");
+      }
+    }
+
+    private void ButtonVerticalBarRigthSlashClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("|");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("\\");
+      }
+    }
+
+    private void ButtonTildeCommaClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{~}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("`");
+      }
+    }
+
+    private void ButtonNumOneClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("!");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{1}");
+      }
+    }
+
+    private void ButtonNumTwoClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("@");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{2}");
+      }
+    }
+
+    private void ButtonNumThreeClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("#");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{3}");
+      }
+    }
+
+    private void ButtonNumFourClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("$");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{4}");
+      }
+    }
+
+    private void ButtonNumFiveClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{%}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{5}");
+      }
+    }
+
+    private void ButtonNumSixClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{^}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{6}");
+      }
+    }
+
+    private void ButtonNumSevenClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("&");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{7}");
+      }
+    }
+
+    private void ButtonNumEightClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{*}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{8}");
+      }
+    }
+
+    private void ButtonNUmNineClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{(}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{9}");
+      }
+    }
+
+    private void ButtonNumZeroClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{)}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{0}");
+      }
+    }
+
+    private void ButtonMinusClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("_");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("{-}");
+      }
+    }
+
+    private void ButtonPlusClick(object sender, EventArgs e)
+    {
+      if (checkBoxCapLock.Checked || checkBoxLeftShift.Checked || checkBoxRightShift.Checked)
+      {
+        SendKeys.Send("{+}");
+        checkBoxLeftShift.Checked = false;
+        checkBoxRightShift.Checked = false;
+      }
+      else
+      {
+        SendKeys.Send("=");
+      }
+    }
+
+    private void ButtonDelClick(object sender, EventArgs e)
+    {
+      SendKeys.Send("{DELETE}");
+    }
+
+    private void Form1Load(object sender, EventArgs e)
+    {
+      var x = Screen.PrimaryScreen.WorkingArea.Width / 2 - Width / 2;
+      var y = Screen.PrimaryScreen.WorkingArea.Height - Height;
+      Location = new Point(x, y);
+      TopMost = true;
+      Opacity = 0.9;
+    }
+
+    private void CheckBoxRightShiftCheckedChanged(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonStartRightClick(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonCtrlRightClick(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonAltRightClick(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonAltLeftClick(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonStartLeftClick(object sender, EventArgs e)
+    {
+    }
+
+    private void CheckBoxCtrlLeftCheckedChanged(object sender, EventArgs e)
+    {
+    }
+
+    private void CheckBoxLeftShiftCheckedChanged(object sender, EventArgs e)
+    {
+    }
+
+    private void CheckBoxCapLockCheckedChanged(object sender, EventArgs e)
+    {
+    }
+
+
+    //helpful:
+
+    //SendKeys.Send("{HOME}");
+    //SendKeys.Send("{END}");
+  }
 }

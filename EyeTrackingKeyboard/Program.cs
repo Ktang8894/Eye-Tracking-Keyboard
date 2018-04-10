@@ -22,7 +22,7 @@ namespace EyeTrackingKeyboard
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            SideBar fm = new SideBar();
+            var fm = new SideBar();
 
             //making the form transperent
             fm.Opacity = new Double();

@@ -40,14 +40,14 @@
       this.Button_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.Button_Close.Font = new System.Drawing.Font("Arial", 7.2F, System.Drawing.FontStyle.Bold);
       this.Button_Close.ForeColor = System.Drawing.Color.White;
-      this.Button_Close.Location = new System.Drawing.Point(5, 260);
+      this.Button_Close.Location = new System.Drawing.Point(6, 261);
       this.Button_Close.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.Button_Close.Name = "Button_Close";
       this.Button_Close.Size = new System.Drawing.Size(69, 62);
       this.Button_Close.TabIndex = 0;
       this.Button_Close.Text = "Close";
       this.Button_Close.UseVisualStyleBackColor = false;
-      this.Button_Close.Click += new System.EventHandler(this.Button_Close_Click);
+      this.Button_Close.Click += new System.EventHandler(this.ButtonCloseClick);
       // 
       // Button_Toggle
       // 
@@ -55,14 +55,14 @@
       this.Button_Toggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.Button_Toggle.Font = new System.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.Button_Toggle.ForeColor = System.Drawing.Color.White;
-      this.Button_Toggle.Location = new System.Drawing.Point(5, 12);
+      this.Button_Toggle.Location = new System.Drawing.Point(6, 6);
       this.Button_Toggle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.Button_Toggle.Name = "Button_Toggle";
       this.Button_Toggle.Size = new System.Drawing.Size(69, 62);
       this.Button_Toggle.TabIndex = 1;
       this.Button_Toggle.Text = "Toggle";
       this.Button_Toggle.UseVisualStyleBackColor = false;
-      this.Button_Toggle.Click += new System.EventHandler(this.Button_Toggle_Click);
+      this.Button_Toggle.Click += new System.EventHandler(this.ButtonToggleClick);
       // 
       // Button_Hide
       // 
@@ -70,14 +70,14 @@
       this.Button_Hide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.Button_Hide.Font = new System.Drawing.Font("Arial", 7.2F, System.Drawing.FontStyle.Bold);
       this.Button_Hide.ForeColor = System.Drawing.Color.White;
-      this.Button_Hide.Location = new System.Drawing.Point(5, 79);
+      this.Button_Hide.Location = new System.Drawing.Point(6, 75);
       this.Button_Hide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.Button_Hide.Name = "Button_Hide";
       this.Button_Hide.Size = new System.Drawing.Size(69, 62);
       this.Button_Hide.TabIndex = 2;
       this.Button_Hide.Text = "Hide Bar";
       this.Button_Hide.UseVisualStyleBackColor = false;
-      this.Button_Hide.Click += new System.EventHandler(this.Button_Hide_Click);
+      this.Button_Hide.Click += new System.EventHandler(this.ButtonHideClick);
       // 
       // Button_Opacity
       // 
@@ -85,14 +85,14 @@
       this.Button_Opacity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.Button_Opacity.Font = new System.Drawing.Font("Arial", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.Button_Opacity.ForeColor = System.Drawing.Color.White;
-      this.Button_Opacity.Location = new System.Drawing.Point(5, 146);
+      this.Button_Opacity.Location = new System.Drawing.Point(6, 144);
       this.Button_Opacity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.Button_Opacity.Name = "Button_Opacity";
       this.Button_Opacity.Size = new System.Drawing.Size(69, 62);
       this.Button_Opacity.TabIndex = 3;
       this.Button_Opacity.Text = "Opacity";
       this.Button_Opacity.UseVisualStyleBackColor = false;
-      this.Button_Opacity.Click += new System.EventHandler(this.Button_Opacity_Click);
+      this.Button_Opacity.Click += new System.EventHandler(this.ButtonOpacityClick);
       // 
       // SideBar
       // 
@@ -109,7 +109,7 @@
       this.Name = "SideBar";
       this.ShowInTaskbar = false;
       this.Text = "SideBar";
-      this.Load += new System.EventHandler(this.SideBar_Load);
+      this.Load += new System.EventHandler(this.SideBarLoad);
       this.ResumeLayout(false);
 
     }

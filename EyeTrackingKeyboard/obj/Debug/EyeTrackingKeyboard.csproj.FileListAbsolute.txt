@@ -17,3 +17,14 @@ C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\EyeTrackingKeyboard\
 C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.exe.config
 C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.exe
 C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.pdb
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.exe.config
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.exe
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.pdb
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\EyeTrackingKeyboard.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\EyeTrackingKeyboard.Keyboard.resources
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.Properties.Resources.resources
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\EyeTrackingKeyboard.SideBar.resources
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\EyeTrackingKeyboard.csproj.GenerateResource.cache
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\EyeTrackingKeyboard.csproj.CoreCompileInputs.cache
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.exe
+C:\Users\Kevin\Desktop\Software Development\Eye-Tracking-Keyboard\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.pdb

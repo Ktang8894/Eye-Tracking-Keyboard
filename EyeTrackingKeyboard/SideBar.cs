@@ -11,64 +11,64 @@ namespace EyeTrackingKeyboard
       InitializeComponent();
     }
 
-    Keyboard form1 = new Keyboard();
-    private void SideBar_Load(object sender, EventArgs e)
+    private Keyboard _keyboard = new Keyboard();
+    private void SideBarLoad(object sender, EventArgs e)
     {
       Width = 80;
-      int x = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-      int y = Screen.PrimaryScreen.WorkingArea.Height / 3;
+      var x = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+      var y = Screen.PrimaryScreen.WorkingArea.Height / 3;
       TopMost = true;
       Location = new Point(x, y);
       Opacity = 0.9;
-      form1.Show();
+      _keyboard.Show();
     }
 
-    private void Button_Close_Click(object sender, EventArgs e)
+    private void ButtonCloseClick(object sender, EventArgs e)
     {
       Environment.Exit(1);
     }
 
-    private void Button_Toggle_Click(object sender, EventArgs e)
+    private void ButtonToggleClick(object sender, EventArgs e)
     {
-      if (form1.Visible)
+      if (_keyboard.Visible)
       {
-        form1.Hide();
+        _keyboard.Hide();
       }
-      else if (!form1.Visible)
+      else if (!_keyboard.Visible)
       {
-        form1.Show();
+        _keyboard.Show();
       } 
     }
-    int flag = 0;
-    private void Button_Hide_Click(object sender, EventArgs e)
+
+    private int _flag;
+    private void ButtonHideClick(object sender, EventArgs e)
     {
-      if (flag == 0)
+      if (_flag == 0)
       {
-        int x = Screen.PrimaryScreen.WorkingArea.Width - this.Width + 60;
-        int y = Screen.PrimaryScreen.WorkingArea.Height / 3;
+        var x = Screen.PrimaryScreen.WorkingArea.Width - this.Width + 60;
+        var y = Screen.PrimaryScreen.WorkingArea.Height / 3;
         Location = new Point(x, y);
-        flag = 1;
+        _flag = 1;
       }
-      else if (flag == 1)
+      else if (_flag == 1)
       {
-        int x = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-        int y = Screen.PrimaryScreen.WorkingArea.Height / 3;
+        var x = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+        var y = Screen.PrimaryScreen.WorkingArea.Height / 3;
         Location = new Point(x, y);
-        flag = 0;
+        _flag = 0;
       }
     }
 
-    double opacity = .9;
-    private void Button_Opacity_Click(object sender, EventArgs e)
+    double _opacity = .9;
+    private void ButtonOpacityClick(object sender, EventArgs e)
     {
-      opacity = opacity - .2;
-      if (opacity < .1)
+      _opacity = _opacity - .2;
+      if (_opacity < .1)
       {
-        opacity = .9;
+        _opacity = .9;
       }
-
-      Opacity = opacity;
-      form1.Opacity = opacity;
+      Opacity = _opacity;
+      _keyboard.Opacity = _opacity;
     }
   }
 }
