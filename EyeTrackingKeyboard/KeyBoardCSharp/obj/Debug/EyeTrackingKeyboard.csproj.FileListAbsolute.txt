@@ -1,0 +1,10 @@
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\KeyBoardCSharp.Properties.Resources.resources
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\EyeTrackingKeyboard.SideBar.resources
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\EyeTrackingKeyboard.csproj.GenerateResource.cache
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\EyeTrackingKeyboard.csproj.CoreCompileInputs.cache
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\KeyBoardCSharp.exe
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\KeyBoardCSharp.pdb
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.exe.config
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.exe
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.pdb
+C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\EyeTrackingKeyboard.Keyboard.resources
