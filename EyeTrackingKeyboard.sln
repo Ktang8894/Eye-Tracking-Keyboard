@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTrackingKeyboard", "KeyBoardCSharp\EyeTrackingKeyboard.csproj", "{E7104AE7-EB34-4CD1-AC83-65029EE32D28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTrackingKeyboard", "EyeTrackingKeyboard\EyeTrackingKeyboard.csproj", "{E7104AE7-EB34-4CD1-AC83-65029EE32D28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,3 +8,12 @@ C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\
 C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.exe
 C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.pdb
 C:\Users\ktang\Desktop\Misc\Eyetracking\KeyBoardCSharp\KeyBoardCSharp\obj\Debug\EyeTrackingKeyboard.Keyboard.resources
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\KeyBoardCSharp\bin\Debug\KeyBoardCSharp.exe.config
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\KeyBoardCSharp\obj\Debug\KeyBoardCSharp.exe
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\KeyBoardCSharp\obj\Debug\KeyBoardCSharp.pdb
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.exe.config
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.exe
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.pdb
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\bin\Debug\KeyBoardCSharp.exe.config
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.exe
+C:\Users\ktang\Desktop\Misc\Eyetracking\EyeTrackingKeyboard\obj\Debug\KeyBoardCSharp.pdb
